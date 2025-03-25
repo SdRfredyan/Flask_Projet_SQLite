@@ -79,3 +79,19 @@ def enregistrer_client():
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
+
+
+@app.route('/fiche_nom/<nom>')
+def search_by_name(nom):
+    if not est_utilisateur_authentifie():
+        return redirect(url_for('authentification'))
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM clients WHERE UPPER(nom) = UPPER(?)', (nom,))
+    data = cursor.fetchall()
+    conn.close()
+    if data:
+        return render_template('read_data.html', data=data)
+    else:
+        return "<h2>Aucun client trouvé avec ce nom.</h2>"
