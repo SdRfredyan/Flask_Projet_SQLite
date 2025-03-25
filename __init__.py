@@ -1,18 +1,14 @@
-from flask import Flask, render_template_string, render_template, jsonify, request, redirect, url_for, session
-from flask import render_template
-from flask import json
-from urllib.request import urlopen
-from werkzeug.utils import secure_filename
+from flask import Flask, render_template, jsonify, request, redirect, url_for, session
 import sqlite3
+from werkzeug.utils import secure_filename
 
-app = Flask(__name__)                                                                                                                  
+app = Flask(__name__)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les sessions
 
 # Fonction pour créer une clé "authentifie" dans la session utilisateur
 def est_authentifie():
     return session.get('authentifie')
 
-# Fonction pour vérifier si l'utilisateur est authentifié
 def est_utilisateur_authentifie():
     return session.get('utilisateur_authentifie')
 
@@ -88,6 +84,79 @@ def enregistrer_client():
     conn.commit()
     conn.close()
     return redirect('/consultation/')
+
+# --------------------------------
+# NOUVELLES ROUTES POUR LES LIVRES
+# --------------------------------
+@app.route('/livres', methods=['GET'])
+def afficher_livres():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM livres')
+    data = cursor.fetchall()
+    conn.close()
+    return render_template('read_data.html', data=data)
+
+@app.route('/livres', methods=['POST'])
+def ajouter_livre():
+    if not est_authentifie():
+        return redirect(url_for('authentification'))
+
+    titre = request.form['titre']
+    auteur = request.form['auteur']
+    disponibilite = True
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('INSERT INTO livres (titre, auteur, disponible) VALUES (?, ?, ?)', 
+                   (titre, auteur, disponibilite))
+    conn.commit()
+    conn.close()
+    return redirect('/livres')
+
+@app.route('/livres/<int:id>', methods=['DELETE'])
+def supprimer_livre(id):
+    if not est_authentifie():
+        return redirect(url_for('authentification'))
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('DELETE FROM livres WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Livre supprimé avec succès'})
+
+@app.route('/emprunter_livre/<int:id>', methods=['POST'])
+def emprunter_livre(id):
+    if not est_utilisateur_authentifie():
+        return redirect(url_for('authentification'))
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+
+    cursor.execute('SELECT disponible FROM livres WHERE id = ?', (id,))
+    livre = cursor.fetchone()
+
+    if livre and livre[0]:  # Si le livre est disponible
+        cursor.execute('UPDATE livres SET disponible = 0 WHERE id = ?', (id,))
+        conn.commit()
+        conn.close()
+        return jsonify({'message': 'Livre emprunté avec succès'})
+    else:
+        conn.close()
+        return jsonify({'error': 'Le livre n\'est pas disponible ou inexistant'}), 404
+
+@app.route('/rendre_livre/<int:id>', methods=['POST'])
+def rendre_livre(id):
+    if not est_utilisateur_authentifie():
+        return redirect(url_for('authentification'))
+
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('UPDATE livres SET disponible = 1 WHERE id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return jsonify({'message': 'Livre rendu avec succès'})
 
 if __name__ == "__main__":
     app.run(debug=True)
