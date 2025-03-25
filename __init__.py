@@ -76,10 +76,6 @@ def enregistrer_client():
     conn.commit()
     conn.close()
     return redirect('/consultation/')  # Rediriger vers la page d'accueil après l'enregistrement
-                                                                                                                                       
-if __name__ == "__main__":
-  app.run(debug=True)
-
 
 @app.route('/fiche_nom/<nom>')
 def search_by_name(nom):
@@ -95,3 +91,9 @@ def search_by_name(nom):
         return render_template('read_data.html', data=data)
     else:
         return "<h2>Aucun client trouvé avec ce nom.</h2>"
+                                                                                                                                       
+if __name__ == "__main__":
+  app.run(debug=True)
+
+
+
