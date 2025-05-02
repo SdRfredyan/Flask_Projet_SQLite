@@ -4,8 +4,12 @@ from flask import json
 from urllib.request import urlopen
 from werkzeug.utils import secure_filename
 import sqlite3
+from models import db, Marque, Modele, User, Favori  # selon ce que tu utilises
 
 app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les session
 
 # Fonction pour créer une clé "authentifie" dans la session utilisateur
