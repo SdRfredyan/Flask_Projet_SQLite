@@ -1,1 +1,2 @@
-from Flask_Projet_SQLite import app
+from __init__ import app
+
