@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <title>Carpedia - Accueil</title>
+  <meta charset="UTF-8">
+  <title>FiabCheck - Accueil</title>
 </head>
 <body>
-    <h1>Bienvenue sur Carpedia</h1>
-    <h2>Marques disponibles</h2>
-    <ul>
-        {% for marque in marques %}
-            <li><a href="/marque/{{ marque.id }}">{{ marque.nom }}</a></li>
-        {% endfor %}
-    </ul>
+  <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
+  <p>Consultez la fiabilité des véhicules, marque par marque.</p>
+
+  <h2>Marques disponibles</h2>
+  <ul>
+    {% for marque in marques %}
+      <li><a href="/marque/{{ marque.id }}">{{ marque.nom }}</a></li>
+    {% endfor %}
+  </ul>
 </body>
 </html>
