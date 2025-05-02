@@ -3,16 +3,19 @@
 <head>
   <meta charset="UTF-8">
   <title>FiabCheck - Accueil</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
-  <p>Consultez la fiabilité des véhicules, marque par marque.</p>
+  <div class="container">
+    <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
+    <p>Consultez la fiabilité des véhicules, marque par marque.</p>
 
-  <h2>Marques disponibles</h2>
-  <ul>
-    {% for marque in marques %}
-      <li><a href="/marque/{{ marque.id }}">{{ marque.nom }}</a></li>
-    {% endfor %}
-  </ul>
+    <h2>Marques disponibles</h2>
+    <ul>
+      {% for marque in marques %}
+        <li><a href="/marque/{{ marque.id }}">{{ marque.nom }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
 </body>
 </html>
