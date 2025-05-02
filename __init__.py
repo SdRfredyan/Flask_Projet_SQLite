@@ -6,9 +6,6 @@ from werkzeug.utils import secure_filename
 import sqlite3
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("DATABASE_URI", "sqlite:///database.db")
-app.config['SECRET_KEY'] = os.getenv("SECRET_KEY", "dev-key")
-db.init_app(app)
 app.secret_key = b'_5#y2L"F4Q8z\n\xec]/'  # Clé secrète pour les session
 
 # Fonction pour créer une clé "authentifie" dans la session utilisateur
@@ -19,9 +16,8 @@ def est_utilisateur_authentifie():
     return session.get('utilisateur_authentifie')
 
 @app.route('/')
-def accueil():
-    marques = Marque.query.all()
-    return render_template('hello.html', marques=marques)
+def hello_world():
+    return render_template('hello.html')
 
 @app.route('/lecture')
 def lecture():
@@ -96,3 +92,7 @@ def enregistrer_client():
                                                                                                                                        
 if __name__ == "__main__":
   app.run(debug=True)
+
+
+
+
