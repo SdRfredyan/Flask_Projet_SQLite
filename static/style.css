@@ -35,6 +35,10 @@ body {
 }
 
 .site-logo-wrapper {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
     background-color: white;
     padding: 12px;
     border-radius: 10px;
