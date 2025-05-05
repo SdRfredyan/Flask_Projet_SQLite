@@ -9,13 +9,15 @@
 
 
 <body>
-<header class="header-flex">
-    <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="FiabCheck" class="site-logo-left">
+<div class="header-flex">
+    <div class="site-logo-wrapper">
+        <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="FiabCheck" class="site-logo-left">
+    </div>
     <div class="header-text">
         <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
         <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
     </div>
-</header>
+</div>
 
 
 <div class="container">
