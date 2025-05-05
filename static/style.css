@@ -34,12 +34,22 @@ body {
     font-size: 16px;
 }
 
+.site-logo-wrapper {
+    background-color: white;
+    padding: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+}
+
 .site-logo-left {
-    position: absolute;
-    left: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    height: 70px;
+    max-width: 80px;
+    max-height: 80px;
+    object-fit: contain;
 }
 
 .header-text {
