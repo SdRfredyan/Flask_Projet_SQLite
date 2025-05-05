@@ -2,15 +2,16 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Carpedia - Accueil</title>
+    <title>FiabCheck - Accueil</title>
 </head>
 <body>
-    <h1>Bienvenue sur Carpedia</h1>
+    <h1>Bienvenue sur FiabCheck</h1>
     <h2>Marques disponibles</h2>
     <ul>
-        {% for marque in marques %}
-            <li><a href="/marque/{{ marque.id }}">{{ marque.nom }}</a></li>
+        {% for id, nom in marques %}
+            <li><a href="/marque/{{ id }}">{{ nom }}</a></li>
         {% endfor %}
     </ul>
+    <a href="/ajouter">Ajouter un modèle</a>
 </body>
 </html>
