@@ -46,11 +46,16 @@ h1, h2 {
     text-align: center;
 }
 
-.site-logo {
-    display: block;
-    margin: 0 auto 15px auto;
-    max-height: 150px;
+.logo-wrapper {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
 }
+
+.site-logo {
+    height: 150px; /* tu peux ajuster ici sans changer la hauteur du header */
+}}
 
 
 .marque-card {
