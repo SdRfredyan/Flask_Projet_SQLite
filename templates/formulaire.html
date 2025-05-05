@@ -2,17 +2,24 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulaire d'enregistrement d'un nouveau client</title>
+    <title>Ajouter un modèle</title>
 </head>
 <body>
-    <h1>Enregistrer un nouveau client</h1>
-    <form action="./enregistrer_client" method="POST">
-        <label for="nom">Nom :</label>
-        <input type="text" id="nom" name="nom" required><br><br>
-        <label for="prenom">Prénom :</label>
-        <input type="text" id="prenom" name="prenom" required><br><br>
-        <button type="submit">Enregistrer</button>
+    <h1>Ajouter un nouveau modèle</h1>
+    <form method="POST">
+        <label>Nom :</label><input type="text" name="nom"><br>
+        <label>Année :</label><input type="text" name="annee"><br>
+        <label>Motorisation :</label><input type="text" name="motorisation"><br>
+        <label>Consommation :</label><input type="text" name="consommation"><br>
+        <label>Fiabilité :</label><input type="text" name="fiabilite"><br>
+        <label>Description :</label><textarea name="description"></textarea><br>
+        <label>Marque :</label>
+        <select name="marque_id">
+            {% for id, nom in marques %}
+                <option value="{{ id }}">{{ nom }}</option>
+            {% endfor %}
+        </select><br>
+        <input type="submit" value="Enregistrer">
     </form>
 </body>
 </html>
