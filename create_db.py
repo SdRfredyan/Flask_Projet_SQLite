@@ -1,6 +1,12 @@
-from app import app
-from models import db
+import sqlite3
+import os
 
-with app.app_context():
-    db.create_all()
-    print("✅ Base de données SQLite créée avec succès.")
+os.makedirs("instance", exist_ok=True)
+conn = sqlite3.connect("database.db")
+
+with open("schema.sql", "r") as f:
+    conn.executescript(f.read())
+
+conn.commit()
+conn.close()
+print("✅ Base de données créée.")
