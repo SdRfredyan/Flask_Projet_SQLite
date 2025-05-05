@@ -89,6 +89,35 @@ def enregistrer_client():
     conn.close()
     return redirect('/consultation/')
 
+@app.route('/ajouter', methods=['GET', 'POST'])
+def ajouter_modele():
+    if request.method == 'POST':
+        nom = request.form['nom']
+        annee = request.form['annee']
+        motorisation = request.form['motorisation']
+        consommation = request.form['consommation']
+        fiabilite = request.form['fiabilite']
+        description = request.form['description']
+        marque_id = request.form['marque_id']
+
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute("""INSERT INTO modele 
+            (nom, annee, motorisation, consommation, fiabilite, description, marque_id) 
+            VALUES (?, ?, ?, ?, ?, ?, ?)""",
+            (nom, annee, motorisation, consommation, fiabilite, description, marque_id)
+        )
+        conn.commit()
+        conn.close()
+        return redirect('/')
+    else:
+        conn = sqlite3.connect('database.db')
+        cursor = conn.cursor()
+        cursor.execute("SELECT id, nom FROM marque")
+        marques = cursor.fetchall()
+        conn.close()
+        return render_template("formulaire.html", marques=marques)
+
 
                                                                                                                                        
 if __name__ == "__main__":
