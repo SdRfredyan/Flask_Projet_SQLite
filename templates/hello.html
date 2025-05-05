@@ -3,15 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>FiabCheck - Accueil</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Bienvenue sur FiabCheck</h1>
-    <h2>Marques disponibles</h2>
-    <ul>
-        {% for id, nom in marques %}
-            <li><a href="/marque/{{ id }}">{{ nom }}</a></li>
-        {% endfor %}
-    </ul>
-    <a href="/ajouter">Ajouter un modèle</a>
+    <header>
+        <h1>Bienvenue sur FiabCheck</h1>
+    </header>
+    <div class="container">
+        <h2>Marques disponibles</h2>
+        <div class="grid-marques">
+            {% for id, nom in marques %}
+                <div class="marque-card">
+                    <a href="/marque/{{ id }}">
+                        <img src="{{ url_for('static', filename='logos/' + nom|lower + '.png') }}" alt="{{ nom }} logo" onerror="this.src='{{ url_for('static', filename='logos/default.png') }}'">
+                        <p>{{ nom }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+        <a href="/ajouter">➕ Ajouter un modèle</a>
+    </div>
 </body>
 </html>
