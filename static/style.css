@@ -16,7 +16,7 @@ body {
 .header-flex {
     display: flex;
     align-items: center;
-    justify-content: center; /* centrage visuel */
+    justify-content: center; /* centrage horizontal */
     background-color: #005fa3;
     color: white;
     padding: 30px 20px;
@@ -33,6 +33,7 @@ body {
 
 .header-text {
     text-align: center;
+    flex: 1; /* prend tout l'espace dispo */
 }
 
 .header-text h1 {
