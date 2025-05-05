@@ -51,6 +51,30 @@ h1, h2 {
     margin: 0 auto 15px;
     max-height: 80px;
 }
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #005fa3;
+    color: white;
+    padding: 20px 40px;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.site-logo-left {
+    height: 100px;
+}
+
+.header-text h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    font-size: 1rem;
+    color: #e0e0e0;
+}
 
 .marque-card {
     text-align: center;
