@@ -6,9 +6,12 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <header>
-        <h1>Bienvenue sur FiabCheck</h1>
-        <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
+    <header class="header">
+        <img src="{{ url_for('static', filename='FiabCheck.png') }}" alt="Logo FiabCheck" class="site-logo">
+        <div class="header-text">
+            <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
+            <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
+        </div>
     </header>
 
     <div class="container">
