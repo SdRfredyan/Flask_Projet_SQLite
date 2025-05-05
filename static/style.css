@@ -14,10 +14,9 @@ body {
 
 /* En-tête */
 header {
-    position: relative;
     background-color: #005fa3;
     color: white;
-    padding: 80px 20px 40px;
+    padding: 30px 20px;
     text-align: center;
 }
 
@@ -47,17 +46,11 @@ h1, h2 {
     text-align: center;
 }
 
-.logo-wrapper {
-    position: absolute;
-    top: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
 .site-logo {
-    height: 150px; /* tu peux ajuster ici sans changer la hauteur du header */
-}}
-
+    display: block;
+    margin: 0 auto 15px;
+    max-height: 80px;
+}
 
 .marque-card {
     text-align: center;
