@@ -17,8 +17,13 @@ def est_utilisateur_authentifie():
     return session.get('utilisateur_authentifie')
 
 @app.route('/')
-def hello_world():
-    return render_template('hello.html')
+def accueil():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute("SELECT id, nom FROM marque")
+    marques = cursor.fetchall()
+    conn.close()
+    return render_template('hello.html', marques=marques)
 
 @app.route('/lecture')
 def lecture():
