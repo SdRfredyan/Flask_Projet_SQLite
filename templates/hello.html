@@ -11,17 +11,23 @@
     </header>
     <div class="container">
         <h2>Marques disponibles</h2>
+
         <div class="grid-marques">
             {% for id, nom in marques %}
                 <div class="marque-card">
                     <a href="/marque/{{ id }}">
-                        <img src="{{ url_for('static', filename='logos/' + nom|lower + '.png') }}" alt="{{ nom }} logo" onerror="this.src='{{ url_for('static', filename='logos/default.png') }}'">
+                        <img src="{{ url_for('static', filename='logos/' + nom|lower + '.png') }}"
+                             alt="{{ nom }} logo"
+                             onerror="this.src='{{ url_for('static', filename='logos/default.png') }}'">
                         <p>{{ nom }}</p>
                     </a>
                 </div>
             {% endfor %}
         </div>
-        <a href="/ajouter">➕ Ajouter un modèle</a>
+
+        <div style="margin-top: 20px;">
+            <a href="/ajouter">➕ Ajouter un modèle</a>
+        </div>
     </div>
 </body>
 </html>
