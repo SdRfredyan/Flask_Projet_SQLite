@@ -12,16 +12,37 @@ body {
     line-height: 1.6;
 }
 
-/* En-tête */
-header {
+/* En-tête avec logo à gauche et texte centré */
+.header-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* centrage visuel */
     background-color: #005fa3;
     color: white;
     padding: 30px 20px;
+    position: relative;
+}
+
+.site-logo-left {
+    position: absolute;
+    left: 30px;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 70px;
+}
+
+.header-text {
     text-align: center;
 }
 
-h1, h2 {
-    margin-bottom: 20px;
+.header-text h1 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+
+.header-text p {
+    font-size: 1rem;
+    color: #e0e0e0;
 }
 
 /* Conteneur principal */
@@ -35,45 +56,16 @@ h1, h2 {
     border-radius: 10px;
 }
 
+.container h2 {
+    text-align: center;
+}
+
 /* Grille des marques */
 .grid-marques {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 20px;
     margin-top: 20px;
-}
-.container h2 {
-    text-align: center;
-}
-
-.site-logo {
-    display: block;
-    margin: 0 auto 15px;
-    max-height: 80px;
-}
-.header-flex {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    background-color: #005fa3;
-    color: white;
-    padding: 20px 40px;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.site-logo-left {
-    height: 100px;
-}
-
-.header-text h1 {
-    font-size: 2rem;
-    margin-bottom: 10px;
-}
-
-.header-text p {
-    font-size: 1rem;
-    color: #e0e0e0;
 }
 
 .marque-card {
@@ -144,5 +136,10 @@ form input[type="submit"]:hover {
     .marque-card img {
         width: 60px;
         height: 60px;
+    }
+
+    .site-logo-left {
+        height: 50px;
+        left: 15px;
     }
 }
