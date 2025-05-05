@@ -3,23 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <title>Ajouter un modèle</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <h1>Ajouter un nouveau modèle</h1>
-    <form method="POST">
-        <label>Nom :</label><input type="text" name="nom"><br>
-        <label>Année :</label><input type="text" name="annee"><br>
-        <label>Motorisation :</label><input type="text" name="motorisation"><br>
-        <label>Consommation :</label><input type="text" name="consommation"><br>
-        <label>Fiabilité :</label><input type="text" name="fiabilite"><br>
-        <label>Description :</label><textarea name="description"></textarea><br>
-        <label>Marque :</label>
-        <select name="marque_id">
-            {% for id, nom in marques %}
-                <option value="{{ id }}">{{ nom }}</option>
-            {% endfor %}
-        </select><br>
-        <input type="submit" value="Enregistrer">
-    </form>
+    <header>
+        <h1>Ajouter un nouveau modèle</h1>
+    </header>
+    <div class="container">
+        <form method="POST">
+            <label>Nom :</label><input type="text" name="nom" required><br>
+            <label>Année :</label><input type="text" name="annee"><br>
+            <label>Motorisation :</label><input type="text" name="motorisation"><br>
+            <label>Consommation :</label><input type="text" name="consommation"><br>
+            <label>Fiabilité :</label><input type="text" name="fiabilite"><br>
+            <label>Description :</label><textarea name="description"></textarea><br>
+            <label>Marque :</label>
+            <select name="marque_id" required>
+                {% for id, nom in marques %}
+                    <option value="{{ id }}">{{ nom }}</option>
+                {% endfor %}
+            </select><br>
+            <input type="submit" value="Enregistrer">
+        </form>
+        <a href="/">⬅ Retour à l'accueil</a>
+    </div>
 </body>
 </html>
