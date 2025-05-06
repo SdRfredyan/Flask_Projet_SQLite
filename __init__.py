@@ -18,7 +18,7 @@ def est_utilisateur_authentifie():
 
 @app.route('/')
 def accueil():
-    conn = sqlite3.connect('/database.db')
+    conn = sqlite3.connect('database.db')
     cursor = conn.cursor()
     cursor.execute("SELECT id, nom FROM marque")
     marques = cursor.fetchall()
@@ -27,7 +27,7 @@ def accueil():
 
 @app.route("/marque/<int:id>")
 def afficher_modele_par_marque(id):
-    conn = sqlite3.connect("/database.db")
+    conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
     cursor.execute("SELECT nom FROM marque WHERE id = ?", (id,))
     marque = cursor.fetchone()
