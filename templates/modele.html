@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Modèles - {{ marque }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h2>Modèles de {{ marque }}</h2>
+
+        <div class="grid-marques">
+            {% for id, nom in modeles %}
+                <div class="marque-card">
+                    <a href="/modele/{{ id }}">
+                        <img src="{{ url_for('static', filename='modele/' + nom|lower + '.png') }}"
+                             alt="{{ nom }}"
+                             onerror="this.src='{{ url_for('static', filename='modele/default.png') }}'">
+                        <p>{{ nom }}</p>
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+</html>
