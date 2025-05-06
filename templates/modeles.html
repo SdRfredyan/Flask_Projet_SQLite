@@ -2,25 +2,42 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Modèles - {{ marque }}</title>
+    <title>FiabCheck - Modèles</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='FiabCheck.ico') }}">
 </head>
 <body>
-    <div class="container">
-        <h2>Modèles de {{ marque }}</h2>
 
+<div class="header-flex">
+    <a href="/" class="site-logo-wrapper">
+        <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="FiabCheck" class="site-logo-left">
+    </a>
+    <div class="header-text">
+        <h1>Bienvenue sur <strong>FiabCheck</strong></h1>
+        <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Modèles de {{ marque }}</h2>
+
+    {% if modeles %}
         <div class="grid-marques">
             {% for id, nom in modeles %}
                 <div class="marque-card">
                     <a href="/modele/{{ id }}">
-                        <img src="{{ url_for('static', filename='modele/' + nom|lower + '.png') }}"
-                             alt="{{ nom }}"
-                             onerror="this.src='{{ url_for('static', filename='modele/default.png') }}'">
+                        <img src="{{ url_for('static', filename='logo/' + nom|lower + '.png') }}"
+                             alt="{{ nom }} logo"
+                             onerror="this.src='{{ url_for('static', filename='logo/default.png') }}'">
                         <p>{{ nom }}</p>
                     </a>
                 </div>
             {% endfor %}
         </div>
-    </div>
+    {% else %}
+        <p>Aucun modèle trouvé pour cette marque.</p>
+    {% endif %}
+</div>
+
 </body>
 </html>
