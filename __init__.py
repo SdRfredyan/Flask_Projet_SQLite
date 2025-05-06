@@ -25,6 +25,21 @@ def accueil():
     conn.close()
     return render_template('hello.html', marques=marques)
 
+@app.route("/marque/<int:id>")
+def afficher_modele_par_marque(id):
+    conn = sqlite3.connect("database.db")
+    cursor = conn.cursor()
+    cursor.execute("SELECT nom FROM marque WHERE id = ?", (id,))
+    marque = cursor.fetchone()
+
+    if not marque:
+        return "<h2>Marque introuvable.</h2>"
+
+    cursor.execute("SELECT id, nom FROM modele WHERE marque_id = ?", (id,))
+    modeles = cursor.fetchall()
+    conn.close()
+    return render_template("modeles.html", marque=marque[0], modeles=modeles)
+
 @app.route('/lecture')
 def lecture():
     if not est_authentifie():
