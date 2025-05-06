@@ -26,8 +26,8 @@
             {% for id, nom in modeles %}
                 <div class="marque-card">
                     <a href="/modele/{{ id }}">
-                        <img src="{{ url_for('static', filename='logo/' + nom|lower + '.png') }}"
-                             alt="{{ nom }} logo"
+                        <img src="{{ url_for('static', filename='modele/' + modele[1]|lower + '.png') }}"
+                             alt="{{ modele[1] }} logo"
                              onerror="this.src='{{ url_for('static', filename='logo/default.png') }}'">
                         <p>{{ nom }}</p>
                     </a>
