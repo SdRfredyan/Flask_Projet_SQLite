@@ -153,15 +153,57 @@ form input[type="submit"]:hover {
     background-color: #004080;
 }
 
-.badge.fiable { color: green; font-weight: bold; }
-.badge.moyenne { color: orange; font-weight: bold; }
-.badge.non { color: red; font-weight: bold; }
-.motorisations {
-    display: flex;
-    gap: 2rem;
+.model-image {
+    max-width: 300px;
+    height: auto;
+    border-radius: 10px;
+    margin: 10px 0;
 }
-.moteur-col {
+
+.motorisation-section {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.motorisation-block {
     flex: 1;
+    min-width: 250px;
+}
+
+.finition-section ul,
+.motorisation-block ul {
+    list-style: none;
+    padding: 0;
+}
+
+.finition-section li,
+.motorisation-block li {
+    margin-bottom: 5px;
+}
+
+.fiable {
+    color: green;
+    font-weight: bold;
+}
+
+.moyenne {
+    color: orange;
+    font-weight: bold;
+}
+
+.non-fiable {
+    color: red;
+    font-weight: bold;
+}
+
+.container {
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 10px;
+    margin: auto;
+    max-width: 1000px;
 }
 
 /* Responsive */
