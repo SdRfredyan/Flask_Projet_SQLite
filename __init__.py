@@ -17,7 +17,7 @@ def accueil():
     conn.close()
     return render_template('hello.html', marques=marques)
 
-@app.route("/marque/<int:id>")
+@app.route("/marque/<int:id>")  #dsqdsq
 def afficher_modele_par_marque(id):
     conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
