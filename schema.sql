@@ -21,7 +21,7 @@ CREATE TABLE modele (
 CREATE TABLE motorisation (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     modele_id INTEGER NOT NULL,
-    type TEXT CHECK(type IN ('essence', 'diesel')) NOT NULL,
+    type TEXT CHECK(type IN ('essence', 'diesel', 'hybride')) NOT NULL,
     nom TEXT NOT NULL, -- Exemple : '2.0L S16'
     puissance TEXT,    -- Exemple : '100 - 150 cv'
     fiabilite TEXT CHECK(fiabilite IN ('fiable', 'moyenne', 'non')) NOT NULL,
