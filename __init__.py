@@ -32,28 +32,41 @@ def afficher_modele_par_marque(id):
     conn.close()
     return render_template("modeles.html", marque=marque[0], modeles=modeles)
 
-@app.route('/modele/<int:id>')
+@app.route("/modele/<int:id>")
 def detail_modele(id):
-    conn = sqlite3.connect('database.db')
+    conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    # Récupère les infos du modèle
-    cursor.execute("SELECT nom, annee FROM modele WHERE id = ?", (id,))
+    # Récupérer les infos du modèle
+    cursor.execute("SELECT nom, annee_debut, annee_fin FROM modele WHERE id = ?", (id,))
     modele = cursor.fetchone()
-
     if not modele:
         return "<h2>Modèle introuvable.</h2>"
 
-    # Exemple simplifié en attendant la vraie structure moteur/finition
-    moteurs = {
-        "essence": [("1.2 PureTech 110", "fiable"), ("1.6 VTi", "non")],
-        "diesel": [("1.6 HDi 92", "moyenne"), ("2.0 BlueHDi", "fiable")]
-    }
+    nom, annee_debut, annee_fin = modele
 
-    finitions = ["Style", "Allure", "GT Line", "GTi"]
+    # Récupérer les motorisations (séparées par type)
+    cursor.execute("""
+        SELECT type, nom, puissance, fiabilite 
+        FROM motorisation 
+        WHERE modele_id = ?
+    """, (id,))
+    motorisations = cursor.fetchall()
+    moteurs = {"essence": [], "diesel": [], "hybride": []}
+    for m in motorisations:
+        moteurs[m[0]].append({
+            "nom": m[1],
+            "puissance": m[2],
+            "fiabilite": m[3]
+        })
+
+    # Récupérer les finitions
+    cursor.execute("SELECT nom FROM finition WHERE modele_id = ?", (id,))
+    finitions = [row[0] for row in cursor.fetchall()]
 
     conn.close()
-    return render_template("modele_detail.html", modele=modele, moteurs=moteurs, finitions=finitions)
+
+    return render_template("modele_detail.html", nom=nom,annee_debut=annee_debut, annee_fin=annee_fin,moteurs=moteurs,finitions=finitions)
 
 @app.route('/ajouter', methods=['GET', 'POST'])
 def ajouter_modele():
