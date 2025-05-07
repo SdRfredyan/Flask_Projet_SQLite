@@ -2,72 +2,58 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>FiabCheck - Détail Modèle</title>
+    <title>{{ nom }} - FiabCheck</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-    <link rel="icon" href="{{ url_for('static', filename='FiabCheck.ico') }}">
 </head>
 <body>
-<div class="header-flex">
-    <a href="/" class="site-logo-wrapper">
-        <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="FiabCheck" class="site-logo-left">
-    </a>
-    <div class="header-text">
-        <h1><strong>FiabCheck</strong></h1>
-        <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
-    </div>
-</div>
+    <header>
+        <div class="logo-container">
+            <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="Logo" class="logo">
+            <h1>FiabCheck</h1>
+        </div>
+    </header>
 
-<div class="container">
-    <h2>{{ modele[0] }}</h2>
-    <p><em>Année : {{ modele[1] }}</em></p>
-    <img src="{{ url_for('static', filename='modele/' + modele[0]|lower|replace(' ', '') + '.png') }}"
-         alt="{{ modele[0] }} image" style="max-width:300px;"
-         onerror="this.src='{{ url_for('static', filename='logo/default.png') }}'">
+    <main>
+        <section class="modele-detail">
+            <h2>{{ nom }} ({{ annee_debut }} - {{ annee_fin }})</h2>
+            <img src="{{ url_for('static', filename='logo/default.png') }}" alt="Image {{ nom }}" style="max-height:200px;"><br>
 
-    <h3>Moteurs disponibles</h3>
-    <div style="display: flex; gap: 40px;">
-        <div>
-            <h4>Essence</h4>
+            <div class="motorisations">
+                <div class="moteur-col">
+                    <h3>Essence</h3>
+                    {% for m in moteurs['essence'] %}
+                        <p>{{ m.nom }} {{ m.puissance }} 
+                            <span class="badge {{ m.fiabilite }}">{{ m.fiabilite }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="moteur-col">
+                    <h3>Diesel</h3>
+                    {% for m in moteurs['diesel'] %}
+                        <p>{{ m.nom }} {{ m.puissance }}
+                            <span class="badge {{ m.fiabilite }}">{{ m.fiabilite }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+
+                <div class="moteur-col">
+                    <h3>Hybride</h3>
+                    {% for m in moteurs['hybride'] %}
+                        <p>{{ m.nom }} {{ m.puissance }}
+                            <span class="badge {{ m.fiabilite }}">{{ m.fiabilite }}</span>
+                        </p>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <h3>Finitions disponibles</h3>
             <ul>
-                {% for moteur, fiab in moteurs['essence'] %}
-                <li>{{ moteur }} —
-                    {% if fiab == 'fiable' %}
-                        🟢 Fiable
-                    {% elif fiab == 'moyenne' %}
-                        🟠 Moyenne
-                    {% else %}
-                        🔴 Non fiable
-                    {% endif %}
-                </li>
+                {% for f in finitions %}
+                    <li>{{ f }}</li>
                 {% endfor %}
             </ul>
-        </div>
-        <div>
-            <h4>Diesel</h4>
-            <ul>
-                {% for moteur, fiab in moteurs['diesel'] %}
-                <li>{{ moteur }} —
-                    {% if fiab == 'fiable' %}
-                        🟢 Fiable
-                    {% elif fiab == 'moyenne' %}
-                        🟠 Moyenne
-                    {% else %}
-                        🔴 Non fiable
-                    {% endif %}
-                </li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-    <h3>Finitions disponibles</h3>
-    <p>
-        {% for finition in finitions %}
-            <span style="display:inline-block; padding:5px 10px; background:#eee; border-radius:10px; margin:3px;">
-                {{ finition }}
-            </span>
-        {% endfor %}
-    </p>
-</div>
+        </section>
+    </main>
 </body>
 </html>
