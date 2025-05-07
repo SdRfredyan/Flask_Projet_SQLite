@@ -2,65 +2,67 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>{{ modele.nom }} - Détails</title>
+    <title>FiabCheck - Détail du modèle</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='FiabCheck.ico') }}">
 </head>
 <body>
-    <header class="header">
-        <div class="logo-container">
-            <img src="{{ url_for('static', filename='logo/FiabCheck.png') }}" alt="Logo" class="logo">
-            <h1 class="site-title">FiabCheck</h1>
-        </div>
-        <p class="slogan">Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
-    </header>
 
-    <main class="container">
-        <h2>{{ modele.nom }} ({{ modele.annee_debut }} - {{ modele.annee_fin }})</h2>
+<div class="header-flex">
+    <a href="/" class="site-logo-wrapper">
+        <img src="{{ url_for('static', filename='FiabCheck.png') }}" alt="FiabCheck" class="site-logo-left">
+    </a>
+    <div class="header-text">
+        <h1><strong>FiabCheck</strong></h1>
+        <p>Explorez les marques pour découvrir les modèles, finitions et motorisations.</p>
+    </div>
+</div>
 
-        <div class="model-image-container">
-            <img src="{{ image_path }}" alt="{{ modele.nom }}" class="model-image">
-        </div>
+<div class="container">
+    <h2>{{ modele.nom }} ({{ modele.annee_debut }} - {{ modele.annee_fin }})</h2>
 
-        <div class="motorisation-section">
-            {% for type in ['essence', 'diesel', 'hybride'] %}
-                <div class="motorisation-block">
-                    <h3>{{ type.capitalize() }}</h3>
-                    {% set moteurs_type = moteurs | selectattr('type', 'equalto', type) | list %}
-                    {% if moteurs_type %}
-                        <ul>
-                        {% for moteur in moteurs_type %}
-                            <li>
-                                {{ moteur.nom }}
-                                {% if moteur.puissance %} ({{ moteur.puissance }}) {% endif %}
-                                {% if moteur.fiabilite == 'fiable' %}
-                                    <span class="fiable">Fiable</span>
-                                {% elif moteur.fiabilite == 'moyenne' %}
-                                    <span class="moyenne">Moyenne</span>
-                                {% else %}
-                                    <span class="non-fiable">Non</span>
-                                {% endif %}
-                            </li>
-                        {% endfor %}
-                        </ul>
-                    {% else %}
-                        <p>Aucune motorisation enregistrée.</p>
-                    {% endif %}
-                </div>
+    <div class="modele-image">
+        <img src="{{ url_for('static', filename='modele/' + modele.nom|lower|replace(' ', '') + '.png') }}"
+             alt="Image du modèle"
+             onerror="this.src='{{ url_for('static', filename='logo/default.png') }}'">
+    </div>
+
+    <div class="motorisation-blocks">
+        <div class="motorisation-column">
+            <h3>Essence</h3>
+            {% for moteur in moteurs if moteur.type == 'essence' %}
+                <p><strong>{{ moteur.nom }}</strong> ({{ moteur.puissance }}) -
+                    <span class="tag {{ moteur.fiabilite }}">{{ moteur.fiabilite }}</span>
+                </p>
             {% endfor %}
         </div>
-
-        <div class="finition-section">
-            <h3>Finitions disponibles</h3>
-            {% if finitions %}
-                <ul>
-                    {% for finition in finitions %}
-                        <li>{{ finition.nom }}</li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p>Aucune finition enregistrée.</p>
-            {% endif %}
+        <div class="motorisation-column">
+            <h3>Diesel</h3>
+            {% for moteur in moteurs if moteur.type == 'diesel' %}
+                <p><strong>{{ moteur.nom }}</strong> ({{ moteur.puissance }}) -
+                    <span class="tag {{ moteur.fiabilite }}">{{ moteur.fiabilite }}</span>
+                </p>
+            {% endfor %}
         </div>
-    </main>
+        <div class="motorisation-column">
+            <h3>Hybride</h3>
+            {% for moteur in moteurs if moteur.type == 'hybride' %}
+                <p><strong>{{ moteur.nom }}</strong> ({{ moteur.puissance }}) -
+                    <span class="tag {{ moteur.fiabilite }}">{{ moteur.fiabilite }}</span>
+                </p>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="finition-block">
+        <h3>Finitions disponibles</h3>
+        <ul>
+            {% for finition in finitions %}
+                <li>{{ finition.nom }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
 </body>
 </html>
