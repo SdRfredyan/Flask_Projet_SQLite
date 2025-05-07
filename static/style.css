@@ -153,6 +153,17 @@ form input[type="submit"]:hover {
     background-color: #004080;
 }
 
+.badge.fiable { color: green; font-weight: bold; }
+.badge.moyenne { color: orange; font-weight: bold; }
+.badge.non { color: red; font-weight: bold; }
+.motorisations {
+    display: flex;
+    gap: 2rem;
+}
+.moteur-col {
+    flex: 1;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
     .grid-marques {
