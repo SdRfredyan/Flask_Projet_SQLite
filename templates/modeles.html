@@ -28,7 +28,7 @@
                     <a href="/modele/{{ id }}">
                         <img src="{{ url_for('static', filename='modele/' + nom|lower|replace(' ', '') + '.png') }}"
                              alt="{{ nom }} image"
-                             onerror="this.src='{{ url_for('static', filename='default.png') }}'">
+                             onerror="this.src='{{ url_for('static', filename='logo/default.png') }}'">
                         <p>{{ nom }}</p>
                     </a>
                 </div>
