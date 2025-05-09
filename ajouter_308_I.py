@@ -52,13 +52,13 @@ for carburant, nom, puissance, fiabilite in motorisations:
     cur.execute("""
         SELECT id FROM motorisation
         WHERE modele_id = ? AND type = ? AND nom = ? AND puissance = ?
-    """, (modele_id, type, nom, puissance))
+    """, (modele_id, type_, nom, puissance))
     mot = cur.fetchone()
     if not mot:
         cur.execute("""
             INSERT INTO motorisation (modele_id, type, nom, puissance, fiabilite)
             VALUES (?, ?, ?, ?, ?)
-        """, (modele_id, carburant, nom, puissance, fiabilite))
+        """, (modele_id, type_, nom, puissance, fiabilite))
 
 # Ajouter les finitions
 for finition in finitions:
