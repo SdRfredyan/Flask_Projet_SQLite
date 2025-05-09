@@ -24,7 +24,7 @@ CREATE TABLE motorisation (
     type TEXT CHECK(type IN ('essence', 'diesel', 'hybride')) NOT NULL,
     nom TEXT NOT NULL, -- Exemple : '2.0L S16'
     puissance TEXT,    -- Exemple : '100 - 150 cv'
-    fiabilite TEXT CHECK(fiabilite IN ('fiable', 'moyenne', 'non')) NOT NULL,
+    fiabilite TEXT CHECK(fiabilite IN ('fiable', 'moyenne', 'non-fiable')) NOT NULL,
     FOREIGN KEY (modele_id) REFERENCES modele(id)
 );
 
