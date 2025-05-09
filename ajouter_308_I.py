@@ -11,9 +11,9 @@ annee_debut = 2007
 annee_fin = 2013
 
 motorisations = [
-    ("essence", "1.4L vti", "95-98", "non-fiable"),
-    ("essence", "1.6L vti", "110-120", "non-fiable"),
-    ("essence", "1.6L thp", "110-200", "non-fiable"),
+    ("essence", "1.4L vti", "95-98", "non"),
+    ("essence", "1.6L vti", "110-120", "non"),
+    ("essence", "1.6L thp", "110-200", "non"),
     ("diesel", "1.6L", "90-115", "fiable"),
     ("diesel", "2.0L hdi", "136-165", "fiable"),
 ]
