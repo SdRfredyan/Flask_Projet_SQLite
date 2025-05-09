@@ -154,10 +154,10 @@ form input[type="submit"]:hover {
 }
 
 .model-image {
-    max-width: 300px;
-    height: auto;
-    border-radius: 10px;
-    margin: 10px 0;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 10px;
 }
 
 .motorisation-section {
