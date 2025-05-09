@@ -51,8 +51,8 @@ else:
 for carburant, nom, puissance, fiabilite in motorisations:
     cur.execute("""
         SELECT id FROM motorisation
-        WHERE modele_id = ? AND carburant = ? AND nom = ? AND puissance = ?
-    """, (modele_id, carburant, nom, puissance))
+        WHERE modele_id = ? AND type = ? AND nom = ? AND puissance = ?
+    """, (modele_id, type, nom, puissance))
     mot = cur.fetchone()
     if not mot:
         cur.execute("""
