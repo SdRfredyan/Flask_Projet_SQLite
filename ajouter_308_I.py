@@ -56,7 +56,7 @@ for carburant, nom, puissance, fiabilite in motorisations:
     mot = cur.fetchone()
     if not mot:
         cur.execute("""
-            INSERT INTO motorisation (modele_id, carburant, nom, puissance, fiabilite)
+            INSERT INTO motorisation (modele_id, type, nom, puissance, fiabilite)
             VALUES (?, ?, ?, ?, ?)
         """, (modele_id, carburant, nom, puissance, fiabilite))
 
