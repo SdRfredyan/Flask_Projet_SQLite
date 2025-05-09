@@ -48,7 +48,7 @@ else:
                 (annee_debut, annee_fin, modele_id))
 
 # Ajouter les motorisations
-for carburant, nom, puissance, fiabilite in motorisations:
+for type_, nom, puissance, fiabilite in motorisations:
     cur.execute("""
         SELECT id FROM motorisation
         WHERE modele_id = ? AND type = ? AND nom = ? AND puissance = ?
