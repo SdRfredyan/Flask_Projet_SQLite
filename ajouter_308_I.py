@@ -36,36 +36,36 @@ else:
     marque_id = marque["id"]
 
 # Vérifier ou créer le modèle
-cur.execute("SELECT id FROM modeles WHERE nom = ? AND marque_id = ?", (modele_nom, marque_id))
+cur.execute("SELECT id FROM modele WHERE nom = ? AND marque_id = ?", (modele_nom, marque_id))
 modele = cur.fetchone()
 if not modele:
-    cur.execute("INSERT INTO modeles (nom, marque_id, annee_debut, annee_fin) VALUES (?, ?, ?, ?)", 
+    cur.execute("INSERT INTO modele (nom, marque_id, annee_debut, annee_fin) VALUES (?, ?, ?, ?)", 
                 (modele_nom, marque_id, annee_debut, annee_fin))
     modele_id = cur.lastrowid
 else:
     modele_id = modele["id"]
-    cur.execute("UPDATE modeles SET annee_debut = ?, annee_fin = ? WHERE id = ?", 
+    cur.execute("UPDATE modele SET annee_debut = ?, annee_fin = ? WHERE id = ?", 
                 (annee_debut, annee_fin, modele_id))
 
 # Ajouter les motorisations
 for carburant, nom, puissance, fiabilite in motorisations:
     cur.execute("""
-        SELECT id FROM motorisations
+        SELECT id FROM motorisation
         WHERE modele_id = ? AND carburant = ? AND nom = ? AND puissance = ?
     """, (modele_id, carburant, nom, puissance))
     mot = cur.fetchone()
     if not mot:
         cur.execute("""
-            INSERT INTO motorisations (modele_id, carburant, nom, puissance, fiabilite)
+            INSERT INTO motorisation (modele_id, carburant, nom, puissance, fiabilite)
             VALUES (?, ?, ?, ?, ?)
         """, (modele_id, carburant, nom, puissance, fiabilite))
 
 # Ajouter les finitions
 for finition in finitions:
-    cur.execute("SELECT id FROM finitions WHERE modele_id = ? AND nom = ?", (modele_id, finition))
+    cur.execute("SELECT id FROM finition WHERE modele_id = ? AND nom = ?", (modele_id, finition))
     exists = cur.fetchone()
     if not exists:
-        cur.execute("INSERT INTO finitions (modele_id, nom) VALUES (?, ?)", (modele_id, finition))
+        cur.execute("INSERT INTO finition (modele_id, nom) VALUES (?, ?)", (modele_id, finition))
 
 conn.commit()
 cur.close()
